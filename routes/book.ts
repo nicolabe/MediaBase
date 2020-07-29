@@ -7,6 +7,7 @@ router
     context.response.body = "Hello world!";
   })
   .get("/books", bookController.getAllBooks)
+  .get("/books/:id", bookController.getBook)
   .post("/books", bookController.createBook);
 // .get("/books/:id", (context) => {
 //   if (context.params && context.params.id && books.has(context.params.id)) {

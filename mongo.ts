@@ -17,6 +17,8 @@ export const addBook = async (title: string, author: string) =>
 export const getBooks = async () =>
   await media.find({ title: { $ne: null }, category: { $eq: MediaType.Book } });
 
+export const getBook = async (bookId: string) =>
+  await media.findOne({ _id: { $oid: bookId } });
 // // insertMany
 // const insertIds = await users.insertMany([
 //   {
