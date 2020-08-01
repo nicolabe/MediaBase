@@ -1,5 +1,6 @@
 import { gql } from "../config/dependencies.ts";
 import { BookTypes } from "./book.ts";
+import { GameTypes } from "./game.ts";
 
 export const Schema = (gql as any)`
     type Query{
@@ -9,7 +10,8 @@ export const Schema = (gql as any)`
       _empty: String
     }
     type CreateResolveType {
-      _id: String
+      _id: ID
     }
     ${BookTypes}
+    ${GameTypes}
 `;

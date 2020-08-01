@@ -7,7 +7,7 @@ client.connectWithUri("mongodb://localhost:27017");
 const db = client.database("media_base");
 const media = db.collection<MediaSchema>("media");
 
-export const addMedia = async (data: any, category: MediaType.Book) =>
+export const addMedia = async (data: any, category: MediaType) =>
   await media.insertOne({
     ...data,
     category,
@@ -18,6 +18,9 @@ export const getAllMedia = async (category: MediaType) =>
 
 export const getMedia = async (mediaId: string) =>
   await media.findOne({ _id: { $oid: mediaId } });
+
+export const deleteMedia = async (mediaId: string) =>
+  await media.deleteOne({ _id: { $oid: mediaId } });
 // // insertMany
 // const insertIds = await users.insertMany([
 //   {

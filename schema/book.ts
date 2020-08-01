@@ -11,10 +11,11 @@ export const BookTypes = (gql as any)`
     author: String!
   }
   extend type Query {
-    getBook(_id: String): Book
+    getBook(_id: ID): Book
     getBooks: [Book]
   }
   extend type Mutation {
     createBook(input: BookInput!): CreateResolveType
+    deleteBook(_id: ID): Boolean
   }
 `;
