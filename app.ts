@@ -4,9 +4,9 @@ import {
 } from "https://deno.land/x/oak@v6.0.1/mod.ts";
 import {
   applyGraphQL,
-  gql,
 } from "https://deno.land/x/oak_graphql/mod.ts";
 import { resolvers } from "./resolvers/index.ts";
+import { Schema } from "./schema/index.ts";
 
 const app = new Application();
 
@@ -22,34 +22,12 @@ app.use(async (ctx, next) => {
   ctx.response.headers.set("X-Response-Time", `${ms}ms`);
 });
 
-const types = (gql as any)`
-type Book {
-  _id: String
-  title: String
-  author: String
-}
-
-input BookInput {
-  title: String
-  author: String
-}
-
-type Query {
-  getBook(id: String): Book,
-  getBooks: [Book]
-}
-
-type Mutation {
-  createBook(input: BookInput!): Book
-}
-`;
-
 const GraphQLService = await applyGraphQL<Router>({
   Router,
-  typeDefs: types,
+  typeDefs: Schema,
   resolvers: resolvers,
   context: (ctx: any) => {
-    return { user: "Aaron" };
+    return;
   },
 });
 

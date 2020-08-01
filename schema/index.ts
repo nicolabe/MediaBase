@@ -3,10 +3,13 @@ import { BookTypes } from "./book.ts";
 
 export const Schema = (gql as any)`
     type Query{
-        _empty: String
+      _empty: String
     }
     type Mutation {
-        _empty: String
+      _empty: String
+    }
+    type CreateResolveType {
+      _id: String
     }
     ${BookTypes}
 `;
