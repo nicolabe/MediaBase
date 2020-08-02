@@ -1,6 +1,5 @@
 import { getMedia, getAllMedia, addMedia, deleteMedia } from "../mongo.ts";
 import { MediaType } from "../interfaces/media.ts";
-import { validateBook } from "../validations/book.ts";
 
 export const BookResolvers = {
   Query: {
@@ -18,16 +17,13 @@ export const BookResolvers = {
   Mutation: {
     createBook: async (
       parent: any,
-      { input: data }: any,
+      { input: { title, author } }: any,
       context: any,
       info: any,
     ) => {
-      if (!validateBook(data)) {
-        return false;
-      }
       const book = await addMedia({
-        title: data.title,
-        author: data.author,
+        title,
+        author,
       }, MediaType.Book);
       return {
         _id: book.$oid,
