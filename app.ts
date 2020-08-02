@@ -7,6 +7,7 @@ import {
 } from "https://deno.land/x/oak_graphql/mod.ts";
 import { resolvers } from "./resolvers/index.ts";
 import { Schema } from "./schema/index.ts";
+import { oakCors } from "https://deno.land/x/cors/mod.ts";
 
 const app = new Application();
 
@@ -31,6 +32,11 @@ const GraphQLService = await applyGraphQL<Router>({
   },
 });
 
+app.use(
+  oakCors({
+    origin: "http://localhost:3000",
+  }),
+);
 app.use(GraphQLService.routes(), GraphQLService.allowedMethods());
 
 console.log("Server start at http://localhost:8080");
